@@ -102,5 +102,11 @@ module.exports = app => {
     //
     router.post('/uploadImg', controller.upload.uploadImg);
     router.get('/category/list', controller.category.index);
-    router.get('/category/create', controller.category.create);
+    router.post('/category/create', controller.category.create);
+    router.post('/category/del', controller.category.destroy);
+
+    router.get('/goods/list', controller.goods.index);
+    router.post('/goods/create', controller.goods.create);
+    router.post('/goods/update', controller.goods.update);
+    router.post('/goods/del', controller.goods.destroy);
   };

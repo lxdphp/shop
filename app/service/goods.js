@@ -2,7 +2,7 @@
 
 const Service = require('egg').Service;
 
-class CategoryService extends Service {
+class GoodsService extends Service {
 
   // 获取list
   async getList(params) {
@@ -12,7 +12,7 @@ class CategoryService extends Service {
     if(params.pid || params.pid === 0) {
       condition.pid = params.pid;
     }
-    const res = this.ctx.model.Category.findAndCountAll({
+    const res = this.ctx.model.Goods.findAndCountAll({
       where: condition,
       raw: true,
     })
@@ -21,14 +21,14 @@ class CategoryService extends Service {
   
   //
   async create(params) {
-    const res = this.ctx.model.Category.create(params);
+    const res = this.ctx.model.Goods.create(params);
 
     return res;
   }
 
   async update(id, params) {
     console.log('params', params)
-    const res = this.ctx.model.Category.update(
+    const res = this.ctx.model.Goods.update(
       params
       ,{
       where:{
@@ -40,7 +40,7 @@ class CategoryService extends Service {
   }
 
   async destroy(id) {
-    const res = this.ctx.model.Category.destroy(
+    const res = this.ctx.model.Goods.destroy(
     {
       where:{
         id,
@@ -54,7 +54,7 @@ class CategoryService extends Service {
 
   // 获取单条数据信息
   async getInfo(id) {
-    const res = await this.ctx.model.Category.findOne({
+    const res = await this.ctx.model.Goods.findOne({
       where: {
         id,
       },
@@ -65,4 +65,4 @@ class CategoryService extends Service {
  
 }
 
-module.exports = CategoryService;
+module.exports = GoodsService;

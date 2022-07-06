@@ -113,7 +113,7 @@ class EventController extends Controller {
         status:status
       }
 
-      await ctx.service.category.update(id, update_arr);
+      await ctx.service.category.destroy(id);
 
     
     } catch (error) {

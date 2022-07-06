@@ -7,13 +7,16 @@ class EventController extends Controller {
     const { ctx, app } = this;
     let { validator } = app;
     const params = ctx.request.query;
-    
-    // 获取所有的假期
-    const res = await ctx.service.catrgory.getList(params);
-    
-    //转成树形结构
-    const tree_data = await ctx.service.menu.recursionDataTree(menu_list.rows, 0);
 
+    // 获取所有的假期
+    const res = await ctx.service.goods.getList(params);
+  
+    for(const item of res.rows) {
+       const category_name = await ctx.service.category.getInfo(item.category_id);
+       item.category_name = category_name.name
+    }
+
+    this.ctx.helper.success(ctx, 1, '成功', res);
   }
 
   // 添加时间事件
@@ -24,16 +27,20 @@ class EventController extends Controller {
     //const uid = 'edc078e6-5974-4b69-81ed-8b0eb5f58111';
 
     let {
-      name,
-      pid,
+      title,
+      img,
+      category_id,
+      des,
     } = params
 
     //插入数据
     const event_arr = {
-      name,
-      pid,
+      title,
+      img,
+      category_id,
+      des,
     }
-    const res_event_arr = await ctx.service.category.create(event_arr);
+    const res_event_arr = await ctx.service.goods.create(event_arr);
     ctx.helper.success(ctx, 1, '成功', { uuid: res_event_arr.dataValues.uuid})
   }
 
@@ -46,32 +53,33 @@ class EventController extends Controller {
     // const user = ctx.session.user;
     // const { uid, name } = user;
     const {
-      name,
-      pid,
+      title,
+      img,
+      category_id,
+      des,
       id,
     } = params
 
 
     try {
-      const arr_info = await ctx.service.category.getInfo(id);
+      const arr_info = await ctx.service.goods.getInfo(id);
       console.log('controller event update arr_info', arr_info);
       if(!arr_info) {
         ctx.helper.success(ctx, -1, '非法参数！')
         return
       }
       
-      if(start) {
-        arr_info.duration = ctx.helper.getDateDiff(start, end, 'day');
-      }
       
       //console.log('controller event create duration', duration); 
       //插入数据
       const event_arr = {
-        name,
-        pid,
+        title,
+      img,
+      category_id,
+      des,
       }
       // 更新数据
-      await ctx.service.category.update(id, event_arr);
+      await ctx.service.goods.update(id, event_arr);
 
 
     } catch (error) {
@@ -98,7 +106,7 @@ class EventController extends Controller {
     // console.log('res11111111', res)
    
     try {
-      const arr_info = await ctx.service.category.getInfo(id);
+      const arr_info = await ctx.service.goods.getInfo(id);
       console.log('controller event destroy arr_info', arr_info);
       if(!arr_info) {
         ctx.helper.success(ctx, -1, '非法参数！')
@@ -111,7 +119,7 @@ class EventController extends Controller {
         status:status
       }
 
-      await ctx.service.category.update(id, update_arr);
+      await ctx.service.goods.update(id, update_arr);
 
     
     } catch (error) {
