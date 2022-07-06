@@ -1,0 +1,4 @@
+varchar -> 文字
+int     -> 数字
+numeric -> 数字(带小数点)
+list    -> 列表

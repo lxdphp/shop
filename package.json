@@ -1,0 +1,50 @@
+{
+  "name": "egg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "egg-scripts start --daemon --title=egg-server-",
+    "start:beta": "egg-scripts start --daemon --title=egg-server- --env=beta",
+    "start:prod": "egg-scripts start --daemon --title=egg-server- --env=prod",
+    "stop": "egg-scripts stop --title=egg-server-",
+    "dev": "egg-bin dev ",
+    "debug": "egg-bin debug",
+    "test": "npm run lint -- --fix && npm run test-local",
+    "test-local": "egg-bin test",
+    "cov": "egg-bin cov",
+    "lint": "eslint .",
+    "ci": "npm run lint && npm run cov",
+    "autod": "autod"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "await-stream-ready": "^1.0.1",
+    "dayjs": "^1.11.3",
+    "egg": "^2.33.1",
+    "egg-cors": "^2.2.3",
+    "egg-redis": "^2.4.0",
+    "egg-scripts": "^2.16.0",
+    "egg-sequelize": "^6.0.0",
+    "egg-validate": "^2.0.2",
+    "exceljs": "^4.3.0",
+    "express": "^4.17.2",
+    "moment": "^2.29.1",
+    "mysql2": "^2.3.3",
+    "node-xlsx": "^0.21.0",
+    "pg": "^8.7.1",
+    "pg-hstore": "^2.3.4",
+    "silly-datetime": "^0.1.2",
+    "socket.io": "^4.4.1",
+    "stream-to-string": "^1.2.0",
+    "stream-wormhole": "^1.1.0",
+    "uuid": "^8.3.2",
+    "xlsx": "^0.18.2"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.8",
+    "egg-bin": "^4.16.4",
+    "sequelize-cli": "^6.4.1"
+  }
+}
