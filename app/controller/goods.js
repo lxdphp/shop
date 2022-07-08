@@ -42,6 +42,7 @@ class EventController extends Controller {
       img,
       category_id,
       des,
+      price,
     } = params
 
     //插入数据
@@ -50,6 +51,7 @@ class EventController extends Controller {
       img,
       category_id,
       des,
+      price,
     }
     const res_event_arr = await ctx.service.goods.create(event_arr);
     ctx.helper.success(ctx, 1, '成功', { uuid: res_event_arr.dataValues.uuid})
@@ -68,6 +70,7 @@ class EventController extends Controller {
       img,
       category_id,
       des,
+      price,
       id,
     } = params
 
@@ -88,6 +91,7 @@ class EventController extends Controller {
       img,
       category_id,
       des,
+      price,
       }
       // 更新数据
       await ctx.service.goods.update(id, event_arr);

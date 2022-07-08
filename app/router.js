@@ -110,4 +110,16 @@ module.exports = app => {
     router.post('/goods/create', controller.goods.create);
     router.post('/goods/update', controller.goods.update);
     router.post('/goods/del', controller.goods.destroy);
+
+    router.get('/gouwuche/list', controller.gouwuche.index);
+    router.post('/gouwuche/create', controller.gouwuche.create);
+    router.post('/gouwuche/update', controller.gouwuche.update);
+    router.post('/gouwuche/del', controller.gouwuche.destroy);
+
+    router.get('/order/list', controller.order.index);
+    router.post('/order/create', controller.order.create);
+    router.post('/order/update', controller.order.update);
+    router.post('/order/del', controller.order.destroy);
+
+    router.post('/user/login', controller.user.login);
   };

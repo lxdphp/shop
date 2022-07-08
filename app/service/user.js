@@ -34,6 +34,25 @@ class UserService extends Service {
     
     return user;
   }
+
+
+  async create(params) {
+    const res = this.ctx.model.User.create(params);
+
+    return res;
+  }
+
+  // 获取单条数据信息
+  async getInfo(phone) {
+    const res = await this.ctx.model.User.findOne({
+      where: {
+        phone,
+      },
+      raw: true,
+    })
+    return res;
+  }
+
   
 }
 

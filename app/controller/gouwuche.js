@@ -12,7 +12,10 @@ class EventController extends Controller {
     
     // 获取所有的假期
     const res = await ctx.service.gouwuche.getList(params);
-    
+    for(const item of res.rows) {
+      const good = await ctx.service.goods.getInfo(item.good_id);
+      item.good_title = good.title;
+    }
     //转成树形结构
     // const tree_data = await ctx.service.menu.recursionDataTree(menu_list.rows, 0);
     this.ctx.helper.success(ctx, 1, '成功', res);

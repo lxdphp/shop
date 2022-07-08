@@ -19,6 +19,9 @@
     status: {
       type: STRING
     },
+    price: {
+      type: STRING
+    },
     img: {
       type: STRING
     },
