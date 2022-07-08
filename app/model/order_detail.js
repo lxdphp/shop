@@ -4,7 +4,7 @@
  module.exports = app => {
   const DataTypes = require('sequelize').DataTypes;
   const { STRING, INTEGER, UUID, DATE, BOOLEAN } = app.Sequelize;
-  const Gouwuche = app.model.define('gouwuche', {
+  const OrderDetail = app.model.define('order_detail', {
     id: {
       type: INTEGER,
       primaryKey: true,
@@ -16,7 +16,7 @@
     phone: {
       type: STRING
     },
-    status: {
+    order_id: {
       type: STRING
     },
     num: {
@@ -30,9 +30,9 @@
     freezeTableName: true,
   }
   );
-  // Gouwuche.associate = function (){
-  //   Gouwuche.belongsTo(app.model.PermissionRules, {foreignKey: 'uuid', targetKey: 'entity_uuid'} )
+  // OrderDetail.associate = function (){
+  //   OrderDetail.belongsTo(app.model.PermissionRules, {foreignKey: 'uuid', targetKey: 'entity_uuid'} )
   // }
  
-  return Gouwuche;
+  return OrderDetail;
 }

@@ -106,6 +106,7 @@ module.exports = app => {
     router.post('/category/del', controller.category.destroy);
 
     router.get('/goods/list', controller.goods.index);
+    router.get('/goods/info', controller.goods.info);
     router.post('/goods/create', controller.goods.create);
     router.post('/goods/update', controller.goods.update);
     router.post('/goods/del', controller.goods.destroy);

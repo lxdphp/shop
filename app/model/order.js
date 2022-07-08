@@ -4,22 +4,13 @@
  module.exports = app => {
   const DataTypes = require('sequelize').DataTypes;
   const { STRING, INTEGER, UUID, DATE, BOOLEAN } = app.Sequelize;
-  const Gouwuche = app.model.define('gouwuche', {
+  const Order = app.model.define('order', {
     id: {
       type: INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    good_id: {
-      type: STRING
-    },
     phone: {
-      type: STRING
-    },
-    status: {
-      type: STRING
-    },
-    num: {
       type: STRING
     },
     created_time: {
@@ -30,9 +21,9 @@
     freezeTableName: true,
   }
   );
-  // Gouwuche.associate = function (){
-  //   Gouwuche.belongsTo(app.model.PermissionRules, {foreignKey: 'uuid', targetKey: 'entity_uuid'} )
+  // Order.associate = function (){
+  //   Order.belongsTo(app.model.PermissionRules, {foreignKey: 'uuid', targetKey: 'entity_uuid'} )
   // }
  
-  return Gouwuche;
+  return Order;
 }
