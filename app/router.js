@@ -122,4 +122,5 @@ module.exports = app => {
     router.post('/order/del', controller.order.destroy);
 
     router.post('/user/login', controller.user.login);
+    router.get('/user/info', controller.user.getinfo);
   };
