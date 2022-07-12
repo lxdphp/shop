@@ -68,6 +68,31 @@ class UserController extends Controller {
     this.ctx.helper.success(ctx, 1, '成功', res);
   }
 
+  // 添加时间事件
+  async loginindex() {
+    const { ctx, app } = this;
+    let { validator } = app;
+    const params = ctx.request.body;
+    //const uid = 'edc078e6-5974-4b69-81ed-8b0eb5f58111';
+
+    let {
+      phone,
+    } = params
+
+    const info = await ctx.service.user.getInfo(phone);
+    if(!info) {
+      const type = 2
+      //插入数据
+      const event_arr = {
+        phone,
+        type,
+      }
+      const res_event_arr = await ctx.service.user.create(event_arr);
+    }
+    
+    ctx.helper.success(ctx, 1, '成功', {"token":phone})
+  }
+
 }
 
 module.exports = UserController;

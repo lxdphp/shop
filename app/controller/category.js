@@ -10,9 +10,42 @@ class EventController extends Controller {
     if(params.parent_id * 1 === -1) {
       params.pid = 0;
     }
-    // 获取所有的假期
+    
     const res = await ctx.service.category.getList(params);
     
+    if(params.index * 1 === 1) {
+      const list_xiang = [];
+      for(const item of res.rows) {
+        const search = {
+          category_id: item.id
+        }
+        const goods = await ctx.service.goods.getList(search);
+        for(const item of goods.rows) {
+          const good_info = await ctx.service.goods.getInfo(item.category_id);
+          item.category_name = good_info.title;
+          item.imgPath = item.img;
+          item.title = item.title
+          console.log(item)
+          list_xiang.push(item);
+        }
+      }
+
+      let map = [];
+      list_xiang.map( item => {
+        const { category_name } = item;
+        if (!map[category_name]) {
+          map[category_name] = {
+            title: category_name,
+            list: [],
+          }
+        }
+        map[category_name].list.push(item);
+  
+      })
+      const new_list_xiang = Object.values(map);
+      this.ctx.helper.success(ctx, 1, '成功', {aside: new_list_xiang });return;
+    }
+
     //转成树形结构
     // const tree_data = await ctx.service.menu.recursionDataTree(menu_list.rows, 0);
     this.ctx.helper.success(ctx, 1, '成功', res);

@@ -13,6 +13,9 @@
     phone: {
       type: STRING
     },
+    type: {
+      type: STRING
+    },
     created_time: {
       type: DATE
     }

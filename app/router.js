@@ -123,4 +123,7 @@ module.exports = app => {
 
     router.post('/user/login', controller.user.login);
     router.get('/user/info', controller.user.getinfo);
+
+    //
+    router.post('/index/login', controller.user.loginindex);
   };

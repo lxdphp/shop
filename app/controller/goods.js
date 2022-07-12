@@ -27,6 +27,31 @@ class EventController extends Controller {
     const arr_info = await ctx.service.goods.getInfo(id);
     const category_name = await ctx.service.category.getInfo(arr_info.category_id);
     arr_info.category_name = category_name.name
+
+    if(params.index * 1 === 1) {
+      const info = {
+        view: {
+          title: arr_info.title,
+          id: arr_info.id,
+          price: arr_info.price,
+          chose: []
+        },
+        swiper: [
+          {
+            imgSrc: arr_info.img,
+            id: 1,
+          }
+        ],
+        contentImgSrc: [
+          {
+            imgSrc: arr_info.img,
+          },
+        ]
+      }
+
+      this.ctx.helper.success(ctx, 1, '成功', info);return;
+    }
+
     this.ctx.helper.success(ctx, 1, '成功', arr_info);
   }
 

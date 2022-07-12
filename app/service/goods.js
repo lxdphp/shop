@@ -12,6 +12,11 @@ class GoodsService extends Service {
     if(params.pid || params.pid === 0) {
       condition.pid = params.pid;
     }
+
+    if(params.category_id) {
+      condition.category_id = params.category_id;
+    }
+
     const res = this.ctx.model.Goods.findAndCountAll({
       where: condition,
       raw: true,
