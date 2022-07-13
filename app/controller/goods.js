@@ -34,7 +34,10 @@ class EventController extends Controller {
           title: arr_info.title,
           id: arr_info.id,
           price: arr_info.price,
-          chose: []
+          chose: [{
+            "col": arr_info.title,
+            "size": arr_info.price
+          },]
         },
         swiper: [
           {

@@ -37,15 +37,15 @@ class EventController extends Controller {
           good_id: item.good_id,
           num: item.num,
           phone: item.phone,
-          oreder_id: order_info.id
+          order_id: order_info.id
         }
         await ctx.service.order.createdetail(event_arr);
 
         // 去除购物车的商品
-        const status = {
-          status: 4
-        }
-        await ctx.service.gouwuche.update(item.id, status);
+        // const status = {
+        //   status: 4
+        // }
+        // await ctx.service.gouwuche.update(item.id, status);
     }
 
     ctx.helper.success(ctx, 1, '成功')
