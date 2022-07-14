@@ -49,6 +49,7 @@ async create() {
     await sendToWormhole(stream);
     this.error();
   }
+  return uplaodBasePath + '/' + dirname + '/'  + filename;
  // this.success({ url: path.join('/public/uploads', dirname, filename) });
 }
 

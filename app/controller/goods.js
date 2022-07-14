@@ -14,6 +14,7 @@ class EventController extends Controller {
     for(const item of res.rows) {
        const category_name = await ctx.service.category.getInfo(item.category_id);
        item.category_name = category_name.name
+       item.img = 'http://120.48.96.203:8082/' + item.img;
     }
 
     this.ctx.helper.success(ctx, 1, '成功', res);

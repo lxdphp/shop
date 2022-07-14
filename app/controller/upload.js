@@ -5,7 +5,9 @@ const Controller = require('egg').Controller;
 class HomeController extends Controller {
   async uploadImg(){
     const { ctx } = this;
-    ctx.body = await ctx.service.upload.create();
+    const url = await ctx.service.upload.create();
+
+    ctx.helper.success(ctx, 1, '成功', url)
   }
 }
 
