@@ -18,6 +18,22 @@ class OrderService extends Service {
     })
     return res;
   }
+
+  // 获取list
+  async getListDetail(params) {
+    const { ctx } = this;
+    const condition = {
+    }
+    if(params.order_id) {
+      condition.order_id = params.order_id;
+    }
+    const res = this.ctx.model.OrderDetail.findAndCountAll({
+      where: condition,
+      raw: true,
+    })
+    return res;
+  }
+  
   
   //
   async create(params) {

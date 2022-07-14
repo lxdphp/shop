@@ -8,10 +8,33 @@ class EventController extends Controller {
     let { validator } = app;
     const params = ctx.request.query;
    
-    params.status = 1;
+    //params.status = 1;
     
     // 获取所有的假期
-    const res = await ctx.service.gouwuche.getList(params);
+    const res = await ctx.service.order.getList(params);
+    
+    //转成树形结构
+    // const tree_data = await ctx.service.menu.recursionDataTree(menu_list.rows, 0);
+    this.ctx.helper.success(ctx, 1, '成功', res);
+  }
+
+  async info() {
+    const { ctx, app } = this;
+    let { validator } = app;
+    const params = ctx.request.query;
+   
+    //params.status = 1;
+
+    params.order_id = params.id;
+    
+    // 获取所有的假期
+    const res = await ctx.service.order.getListDetail(params);
+
+    for(const item of res.rows) {
+      const good_indo =  await ctx.service.goods.getInfo(item.good_id);
+      item.good_name = good_indo.title;
+
+    }
     
     //转成树形结构
     // const tree_data = await ctx.service.menu.recursionDataTree(menu_list.rows, 0);
@@ -27,7 +50,7 @@ class EventController extends Controller {
 
     //插入订单
     const order_add = {
-      phone: params.phone
+      phone: params[0].phone
     }
     const order_info = await ctx.service.order.create(order_add);
 
@@ -37,7 +60,8 @@ class EventController extends Controller {
           good_id: item.good_id,
           num: item.num,
           phone: item.phone,
-          order_id: order_info.id
+          order_id: order_info.id,
+          price: item.price
         }
         await ctx.service.order.createdetail(event_arr);
 
@@ -45,7 +69,7 @@ class EventController extends Controller {
         // const status = {
         //   status: 4
         // }
-        // await ctx.service.gouwuche.update(item.id, status);
+        // await ctx.service.order.update(item.id, status);
     }
 
     ctx.helper.success(ctx, 1, '成功')
@@ -66,7 +90,7 @@ class EventController extends Controller {
 
 
     try {
-      const arr_info = await ctx.service.gouwuche.getInfo(id);
+      const arr_info = await ctx.service.order.getInfo(id);
       console.log('controller event update arr_info', arr_info);
       if(!arr_info) {
         ctx.helper.success(ctx, -1, '非法参数！')
@@ -83,7 +107,7 @@ class EventController extends Controller {
         num
       }
       // 更新数据
-      await ctx.service.gouwuche.update(id, event_arr);
+      await ctx.service.order.update(id, event_arr);
 
 
     } catch (error) {
@@ -110,7 +134,7 @@ class EventController extends Controller {
     // console.log('res11111111', res)
    
     try {
-      const arr_info = await ctx.service.gouwuche.getInfo(id);
+      const arr_info = await ctx.service.order.getInfo(id);
       console.log('controller event destroy arr_info', arr_info);
       if(!arr_info) {
         ctx.helper.success(ctx, -1, '非法参数！')
@@ -123,7 +147,7 @@ class EventController extends Controller {
         status:status
       }
 
-      await ctx.service.gouwuche.update(id, update_arr);
+      await ctx.service.order.update(id, update_arr);
 
     
     } catch (error) {

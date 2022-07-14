@@ -35,8 +35,8 @@ class EventController extends Controller {
           id: arr_info.id,
           price: arr_info.price,
           chose: [{
-            "col": arr_info.title,
-            "size": arr_info.price
+            "col": '商品：' + arr_info.title,
+            "size": '价格：' + arr_info.price
           },]
         },
         swiper: [
@@ -46,9 +46,9 @@ class EventController extends Controller {
           }
         ],
         contentImgSrc: [
-          {
-            imgSrc: arr_info.img,
-          },
+          // {
+          //   imgSrc: arr_info.img,
+          // },
         ]
       }
 

@@ -21,8 +21,8 @@ class EventController extends Controller {
         }
         const goods = await ctx.service.goods.getList(search);
         for(const item of goods.rows) {
-          const good_info = await ctx.service.goods.getInfo(item.category_id);
-          item.category_name = good_info.title;
+          const category_info = await ctx.service.category.getInfo(item.category_id);
+          item.category_name = category_info.name || '';
           item.imgPath = item.img;
           item.title = item.title
           console.log(item)

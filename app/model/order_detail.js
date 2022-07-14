@@ -22,6 +22,9 @@
     num: {
       type: STRING
     },
+    price: {
+      type: STRING
+    },
     created_time: {
       type: DATE
     }

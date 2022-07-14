@@ -118,6 +118,8 @@ module.exports = app => {
 
     router.get('/order/list', controller.order.index);
     router.post('/order/create', controller.order.create);
+    router.get('/order/info', controller.order.info);
+
     router.post('/order/update', controller.order.update);
     router.post('/order/del', controller.order.destroy);
 
